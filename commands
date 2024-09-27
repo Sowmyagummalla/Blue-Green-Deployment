@@ -1,0 +1,24 @@
+eksctl version
+eksctl create cluster --name=ekskube --region=ap-south-1 --zones=ap-south-1a,ap-south-1b --version=1.30 --without-nodegroup
+eksctl create nodegroup --cluster=ekskube --region=ap-south-1 --name=ekskube1-ng-public1 --node-type=t3.medium  --nodes=2 --nodes-min=2 --nodes-max=4 --node-volume-size=20 --ssh-access --ssh-public-key=clusterdev  --managed --asg-access --external-dns-access --full-ecr-access --appmesh-access --alb-ingress-access
+ aws eks update-kubeconfig --name=ekskube --region ap-south-1
+ kubectl get nodes
+ kubectl get pods
+ kubectl get svc
+docker login
+ nano blue-deployment.yml
+ kubectl apply -f .\blue-deployment.yml
+ kubectl get deployment
+ kubectl get pods -o wide
+ nano green-deployment.yml
+ kubectl apply -f .\green-deployment.yml
+ kubectl get deployment
+ kubectl get pods -o wide
+ nano service.yml
+ kubectl apply -f .\service.yml [app=blue]
+ kubectl get svc
+ kubectl get svc -o wide
+kubectl get pods -o wide
+ nano service.yml
+kubectl apply -f .\service.yml [app=green]
+eksctl delete cluster --name=ekskube --region=ap-south-1
